@@ -26,7 +26,7 @@ export default function Feed(props) {
           <Tweet key={tweet.id} tweet={tweet}/>
         ))}
         
-        </div>
+      </div>
     </div>
   )
 }

@@ -5,9 +5,12 @@ import Tweet from "../Tweet/Tweet"
 
 export default function TweetBox(props) {
   
+  const [characterCount, setCharacterCount] = React.useState(0)
+
   function handleOnTweetTextChange (evt){
     props.setTweetText(evt.target.value)
-  }
+    setCharacterCount(evt.target.value.length)
+    }
 
   function handleOnSubmit (){
     let newTweet = {
@@ -35,9 +38,11 @@ export default function TweetBox(props) {
 
       <div className="tweet-box-footer">
         <TweetBoxIcons />
-        <TweetCharacterCount />
+        <TweetCharacterCount
+          characterCount={characterCount}/>
         <TweetSubmitButton
-          handleOnSubmit={handleOnSubmit}/>
+          handleOnSubmit={handleOnSubmit}
+          characterCount={characterCount}/>
       </div>
     </div>
   )
@@ -54,16 +59,29 @@ export function TweetBoxIcons() {
   )
 }
 
-export function TweetCharacterCount(props) {
-  // ADD CODE HERE
-  return <span></span>
+export function TweetCharacterCount( {characterCount} ) {
+  return (
+    <span className={characterCount>140 ? "tweet-length red":"tweet-length"}>
+      {characterCount > 0 ? 140-characterCount : null}
+    </span>
+  )
 }
 
-export function TweetSubmitButton( {handleOnSubmit = () => {}} ) {
+export function TweetSubmitButton( {handleOnSubmit, characterCount} ) {
   return (
     <div className="tweet-submit">
       <i className="fas fa-plus-circle"></i>
-      <button className="tweet-submit-button" onClick={handleOnSubmit}>Tweet</button>
+      <button className="tweet-submit-button" onClick={handleOnSubmit}
+        disabled={!(characterCount > 0 && characterCount <= 140)}>Tweet</button>
     </div>
   )
 }
+
+// export function TweetSubmitButton( {handleOnSubmit} ) {
+//   return (
+//     <div className="tweet-submit">
+//       <i className="fas fa-plus-circle"></i>
+//       <button className="tweet-submit-button" onClick={handleOnSubmit}>Tweet</button>
+//     </div>
+//   )
+// }

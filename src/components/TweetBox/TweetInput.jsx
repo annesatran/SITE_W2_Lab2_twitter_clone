@@ -10,7 +10,6 @@ export default function TweetInput(props) {
         name="new-tweet-input" type="text" placeholder="What's Happening?"
           onChange={props.handleOnChange}
           value={props.value}></textarea>
-
       <SmileIcon />
     </div>
   )
