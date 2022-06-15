@@ -5,6 +5,8 @@ import TweetBox from "../TweetBox/TweetBox"
 import "./Feed.css"
 
 export default function Feed(props) {
+
+  console.log(111, props.tweets)
   return (
     <div className="col feed">
       {/* UPDATE TWEET BOX PROPS HERE */}
